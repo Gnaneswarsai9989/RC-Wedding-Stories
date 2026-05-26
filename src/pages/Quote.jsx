@@ -1507,21 +1507,43 @@ export default function Quote() {
   const generatePDF = async (shouldSave = true) => {
     if (!invoiceRef.current) return null;
     setPdfLoading(true);
+    let clone = null;
     try {
       const element = invoiceRef.current;
-      const canvas = await html2canvas(element, {
+      
+      // ── DOM Cloning for Desktop-sized Render Canvas ──
+      // Clones the invoice display element and styles it with a fixed desktop layout.
+      // This guarantees that the PDF downloaded from mobile has the exact same pristine,
+      // un-wrapped, perfectly aligned, high-end look as the desktop version.
+      clone = element.cloneNode(true);
+      clone.style.width = '800px';
+      clone.style.maxWidth = '800px';
+      clone.style.padding = '48px';
+      clone.style.position = 'fixed';
+      clone.style.left = '-9999px';
+      clone.style.top = '0';
+      clone.style.margin = '0';
+      clone.style.boxShadow = 'none';
+      clone.style.background = '#ffffff';
+      document.body.appendChild(clone);
+
+      const canvas = await html2canvas(clone, {
         scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
-        width: element.scrollWidth,
-        height: element.scrollHeight,
+        width: 800,
+        height: clone.scrollHeight,
       });
+
+      // Cleanup clone immediately
+      document.body.removeChild(clone);
+      clone = null;
 
       const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       const pageW = pdf.internal.pageSize.getWidth();   // 210mm
       const pageH = pdf.internal.pageSize.getHeight();  // 297mm
 
-      const margin = 8; // mm on each side
+      const margin = 12; // mm on each side — premium wide elegant margin
       const imgW = pageW - margin * 2;
       const imgH = (canvas.height / canvas.width) * imgW;
 
@@ -1540,7 +1562,12 @@ export default function Quote() {
           const sliceCanvas = document.createElement('canvas');
           sliceCanvas.width = canvas.width;
           sliceCanvas.height = sliceH;
-          sliceCanvas.getContext('2d').drawImage(canvas, 0, -yOffset);
+          
+          const ctx = sliceCanvas.getContext('2d');
+          // Fill canvas with solid white to prevent transparent render bugs in PDF
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, sliceH);
+          ctx.drawImage(canvas, 0, -yOffset);
 
           const sliceImgH = (sliceH / canvas.width) * imgW;
           pdf.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', margin, margin, imgW, sliceImgH);
@@ -1558,6 +1585,9 @@ export default function Quote() {
       return blob;
     } catch (e) {
       console.error('PDF error:', e);
+      if (clone && document.body.contains(clone)) {
+        document.body.removeChild(clone);
+      }
       setPdfLoading(false);
       return null;
     }
