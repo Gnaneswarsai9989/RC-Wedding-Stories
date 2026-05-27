@@ -78,6 +78,17 @@ export default function Gallery() {
           />
         </div>
 
+        {/* Top gradient — darkens image naturally at navbar area, no box blur */}
+        <div
+          className="absolute inset-0 z-1 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.35) 12%, rgba(8,8,8,0.08) 25%, transparent 38%)' }}
+        />
+        {/* Bottom fade — blends image into #080808 content below */}
+        <div
+          className="absolute inset-0 z-1 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(8,8,8,0.6) 70%, rgba(8,8,8,0.92) 88%, #080808 100%)' }}
+        />
+
         {/* Banner Content (Big Text, Subtitle) */}
         <motion.div
           className="relative z-10 text-center px-6 max-w-4xl pb-20 sm:pb-28 md:pb-36"
@@ -166,23 +177,16 @@ export default function Gallery() {
 
       {/* ─── Scrolling Body (sits over fixed banner as user scrolls) ─── */}
       <div className="relative w-full z-10 bg-[#080808] mt-[410px] sm:mt-[450px] md:mt-[520px]">
-        {/* Realistic Double-Layered Ripped Scrapbook Paper Borders */}
-        <svg
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="absolute top-0 left-0 w-full h-14 sm:h-16 md:h-20 z-20 pointer-events-none select-none -translate-y-[97%] drop-shadow-[0_-3px_10px_rgba(0,0,0,0.45)]"
-        >
-          {/* Layer 1: Warm off-white deckled paper tear strip */}
-          <path
-            d="M0,35 L40,38 L85,32 L130,42 L185,35 L240,45 L290,38 L345,42 L395,33 L450,45 L510,38 L570,42 L620,32 L675,44 L730,35 L785,42 L840,32 L895,45 L945,36 L1000,43 L1055,34 L1110,46 L1160,37 L1215,43 L1270,33 L1325,44 L1380,35 L1440,40 L1440,60 L0,60 Z"
-            fill="#f7f5f0"
-          />
-          {/* Layer 2: Main solid background-matching tear strip */}
-          <path
-            d="M0,45 L40,48 L85,42 L130,52 L185,45 L240,55 L290,48 L345,52 L395,43 L450,55 L510,48 L570,52 L620,42 L675,54 L730,45 L785,52 L840,42 L895,55 L945,46 L1000,53 L1055,44 L1110,56 L1160,47 L1215,53 L1270,43 L1325,54 L1380,45 L1440,50 L1440,100 L0,100 Z"
-            fill="#080808"
-          />
-        </svg>
+        {/* Gradient that overlays the fixed image as user scrolls — always positioned above the scrolling body */}
+        <div
+          className="absolute top-0 left-0 w-full pointer-events-none"
+          style={{
+            height: '180px',
+            transform: 'translateY(-100%)',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(8,8,8,0.6) 55%, #080808 100%)',
+            zIndex: 10,
+          }}
+        />
 
         {/* ── Filter Tabs ── */}
         <motion.div
@@ -259,7 +263,7 @@ export default function Gallery() {
                   }}
                   animate={{
                     scale:   hovered === img.id ? 1.04 : 1,
-                    opacity: hovered === img.id ? 1.0  : 0.88,
+                    opacity: 1,
                   }}
                   transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                 />

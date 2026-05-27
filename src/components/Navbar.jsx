@@ -213,10 +213,12 @@ export default function Navbar({ currentPage }) {
         transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         style={{
           paddingTop: 16, paddingBottom: 16,
-          background: mobileOpen ? 'transparent' : 'linear-gradient(180deg, rgba(10,10,10,0.8) 0%, transparent 100%)',
-          backdropFilter: mobileOpen ? 'none' : 'blur(16px)',
-          WebkitBackdropFilter: mobileOpen ? 'none' : 'blur(16px)',
-          transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
+          background: 'transparent',
+          backdropFilter: mobileOpen ? 'none' : 'blur(6px)',
+          WebkitBackdropFilter: mobileOpen ? 'none' : 'blur(6px)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 55%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 55%, transparent 100%)',
+          transition: 'backdrop-filter 0.4s ease',
         }}
       >
         <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="cursor-pointer">
