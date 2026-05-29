@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import { FiArrowUpRight } from 'react-icons/fi';
+import Logo from './Logo';
 
 /**
  * Navbar — premium milky glass pill with animated borders & micro-interactions
@@ -85,7 +86,7 @@ export default function Navbar({ currentPage }) {
         style={{ paddingTop: scrolled ? '10px' : '20px', transition: 'padding 0.5s ease' }}
       >
         <motion.nav
-          className="hidden md:flex items-center gap-1 px-3 py-2 relative rounded-full"
+          className="hidden md:flex items-center gap-1 pr-3 py-2 relative rounded-full"
           style={{
             background: 'rgba(15, 15, 15, 0.55)',
             backdropFilter: 'blur(24px)',
@@ -95,6 +96,7 @@ export default function Navbar({ currentPage }) {
               : '0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)',
             border: '1px solid rgba(255,255,255,0.08)',
             transition: 'all 0.5s ease',
+            paddingLeft: scrolled ? '75px' : '90px',
           }}
           animate={{ scale: scrolled ? 0.97 : 1 }}
           transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -113,20 +115,14 @@ export default function Navbar({ currentPage }) {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2 px-4 py-2 mr-12 cursor-pointer group"
+            className="flex items-center cursor-pointer group"
+            style={{
+              marginLeft: '5px',
+              marginRight: scrolled ? '65px' : '80px',
+              transition: 'all 0.5s ease',
+            }}
           >
-            <motion.span
-              style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 19, fontWeight: 500, letterSpacing: '0.05em' }}
-              className="text-white group-hover:text-white transition-all duration-300"
-              whileHover={{ textShadow: '0 0 20px rgba(255,255,255,0.4)' }}
-            >
-              RC
-            </motion.span>
-            <span
-              style={{ fontFamily: 'Inter, sans-serif', fontSize: 9, fontWeight: 300, letterSpacing: '0.25em', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', lineHeight: 1.2 }}
-            >
-              Wedding<br />Stories
-            </span>
+            <Logo height={42} scale={2.4} style={{ transform: 'scale(2.4) translateY(1.5px)' }} />
           </a>
 
           {/* Separator */}
@@ -221,13 +217,13 @@ export default function Navbar({ currentPage }) {
           transition: 'backdrop-filter 0.4s ease',
         }}
       >
-        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="cursor-pointer">
-          <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 500, color: 'white' }}>
-            RC{' '}
-            <span style={{ fontSize: 12, fontWeight: 300, fontFamily: 'Inter', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.55)' }}>
-              WEDDING
-            </span>
-          </span>
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="cursor-pointer flex items-center"
+          style={{ marginLeft: '25px' }}
+        >
+          <Logo height={36} scale={2.2} style={{ transform: 'scale(2.2) translateY(1px)' }} />
         </a>
 
         <motion.button

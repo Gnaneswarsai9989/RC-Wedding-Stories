@@ -289,7 +289,7 @@ function ServiceSection({ service, index }) {
                 } else {
                   const messageText = `Hi RC Wedding Stories! I would like to book a story with you. I am interested in your *${service.title}* package. Could you please share more details?`;
                   const encodedText = encodeURIComponent(messageText);
-                  const whatsappUrl = `https://wa.me/916304000624?text=${encodedText}`;
+                  const whatsappUrl = `https://wa.me/917730861421?text=${encodedText}`;
                   window.open(whatsappUrl, '_blank');
                 }
               }}

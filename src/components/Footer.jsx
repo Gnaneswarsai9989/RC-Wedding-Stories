@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { RiInstagramLine, RiFacebookBoxLine, RiYoutubeLine, RiWhatsappLine, RiArrowUpLine, RiMailLine, RiPhoneLine, RiMapPinLine } from 'react-icons/ri';
 import { socialLinks } from '../data/mediaData';
+import Logo from './Logo';
 
 /**
  * Footer — Premium redesigned footer with clean Inter sans-serif typography
@@ -27,8 +28,8 @@ export default function Footer() {
   ];
 
   const contactItems = [
-    { Icon: RiMailLine,   text: 'rcweddingstoriesnellore@gmail.com', href: 'mailto:rcweddingstoriesnellore@gmail.com' },
-    { Icon: RiPhoneLine,  text: '+91 63040 00624',            href: 'tel:+916304000624'                },
+    { Icon: RiMailLine,   text: 'rcweddingstories183@gmail.com', href: 'mailto:rcweddingstories183@gmail.com' },
+    { Icon: RiPhoneLine,  text: '+91 77308 61421',            href: 'tel:+917730861421'                },
     { Icon: RiMapPinLine, text: 'Magunta Layout 1947, 2nd Floor, Nellore, Andhra Pradesh', href: null          },
   ];
 
@@ -37,7 +38,7 @@ export default function Footer() {
       ref={ref}
       className="relative"
       style={{
-        background: '#000000',
+        background: '#0a0a0a',
         borderTop: '1px solid rgba(255,255,255,0.08)',
         overflow: 'hidden',
       }}
@@ -63,30 +64,18 @@ export default function Footer() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2
-              className="text-white mb-1 leading-none"
+            <a
+              href="#home"
+              onClick={scrollToTop}
+              className="flex items-center cursor-pointer group"
               style={{
-                fontFamily: "Cormorant Garamond, serif",
-                fontSize: 34,
-                fontWeight: 400,
-                letterSpacing: '0.06em',
+                marginTop: '15px',
+                marginBottom: '15px',
+                marginLeft: '40px',
               }}
             >
-              RC
-            </h2>
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 8.5,
-                fontWeight: 300,
-                letterSpacing: '0.25em',
-                color: 'rgba(255,255,255,0.45)',
-                textTransform: 'uppercase',
-                marginTop: 4,
-              }}
-            >
-              Wedding Stories
-            </p>
+              <Logo height={56} scale={1.8} style={{ transform: 'scale(1.8) translateY(1px)' }} />
+            </a>
             <p
               className="leading-relaxed mt-4"
               style={{

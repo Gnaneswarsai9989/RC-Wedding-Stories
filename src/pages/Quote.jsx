@@ -25,7 +25,7 @@ import html2canvas from 'html2canvas';
 /* ─────────────────────────────────────────────────────────────
    ★  CONFIGURATION — Edit pricing & contact here
 ───────────────────────────────────────────────────────────── */
-const FOUNDER_WHATSAPP = '916304000624'; // Change to founder's number
+const FOUNDER_WHATSAPP = '917730861421'; // Change to founder's number
 
 const PRICING = {
   // Photography types
@@ -149,7 +149,7 @@ const fmt = (n) => '₹' + n.toLocaleString('en-IN');
    INITIAL STATE
 ───────────────────────────────────────────────────────────── */
 const initialState = () => ({
-  photoType:     null,   // 'candid' | 'traditional'
+  photoType:     [],    // ['candid', 'traditional', 'drone'] — multi-select
   events:        {},     // { [eventId]: { [serviceId]: qty } }
   sangeeth:      null,
   sangeethSvcs:  {},
@@ -1661,7 +1661,7 @@ export default function Quote() {
       `*Email:* ${c.email || 'N/A'}\n` +
       `*Wedding Date:* ${c.date || 'TBD'}\n` +
       `*Location:* ${c.location || 'N/A'}\n\n` +
-      `*Photography:* ${state.photoType === 'candid' ? 'Candid' : state.photoType === 'traditional' ? 'Traditional' : state.photoType === 'drone' ? 'Drone' : 'Not selected'}\n` +
+      `*Photography:* ${state.photoType.length > 0 ? state.photoType.map(t => t === 'candid' ? 'Candid' : t === 'traditional' ? 'Traditional' : t === 'drone' ? 'Drone' : t).join(', ') : 'Not selected'}\n` +
       `*Shooting Style:* ${state.shootingStyle || 'Not selected'}\n` +
       `*Events:* ${EVENT_PAGES.filter(e => Object.values(state.events[e.id] || {}).some(v => v > 0)).map(e => e.label).join(', ') || 'None'}\n` +
       `*Sangeeth:* ${state.sangeeth === 'yes' ? 'Yes' : 'No'}\n` +
@@ -2140,7 +2140,16 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
             ].map(opt => (
               <motion.div
                 key={opt.id}
-                onClick={() => setState(s => ({ ...s, photoType: opt.id }))}
+                onClick={() => setState(s => {
+                  const current = s.photoType || [];
+                  const isSelected = current.includes(opt.id);
+                  return {
+                    ...s,
+                    photoType: isSelected
+                      ? current.filter(id => id !== opt.id)
+                      : [...current, opt.id],
+                  };
+                })}
                 whileHover={{ y: -8, scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 280, damping: 18 }}
@@ -2149,22 +2158,22 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                   width: 'clamp(180px, 28vw, 270px)',
                   padding: '36px 28px',
                   borderRadius: 24,
-                  border: state.photoType === opt.id ? `2px solid ${C.red}` : `2px solid ${C.glassBorder}`,
-                  background: state.photoType === opt.id
-                    ? `linear-gradient(135deg, rgba(10,10,10,0.07), rgba(10,10,10,0.02))`
+                  border: (state.photoType || []).includes(opt.id) ? `2px solid ${C.green}` : `2px solid ${C.glassBorder}`,
+                  background: (state.photoType || []).includes(opt.id)
+                    ? `linear-gradient(135deg, rgba(16,185,129,0.07), rgba(16,185,129,0.02))`
                     : C.glass,
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
                   cursor: 'pointer',
                   textAlign: 'center',
-                  boxShadow: state.photoType === opt.id
-                    ? `0 0 40px rgba(10,10,10,0.2), ${C.shadowHover}`
+                  boxShadow: (state.photoType || []).includes(opt.id)
+                    ? `0 0 40px rgba(16,185,129,0.2), ${C.shadowHover}`
                     : C.shadow,
                   transition: 'border 0.3s, box-shadow 0.3s, background 0.3s',
                 }}
               >
                 <AnimatePresence>
-                  {state.photoType === opt.id && (
+                  {(state.photoType || []).includes(opt.id) && (
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -2172,7 +2181,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                       style={{
                         position: 'absolute', top: 14, right: 14,
                         width: 28, height: 28, borderRadius: '50%',
-                        background: C.red,
+                        background: C.green,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                       }}
                     >
@@ -2181,7 +2190,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                   )}
                 </AnimatePresence>
                 <motion.div
-                  animate={{ scale: state.photoType === opt.id ? 1.12 : 1 }}
+                  animate={{ scale: (state.photoType || []).includes(opt.id) ? 1.12 : 1 }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -2203,7 +2212,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     }}
                   />
                 </motion.div>
-                <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 700, color: state.photoType === opt.id ? C.red : C.navy, marginBottom: 8 }}>
+                <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 700, color: (state.photoType || []).includes(opt.id) ? C.green : C.navy, marginBottom: 8 }}>
                   {opt.label}
                 </div>
                 <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: C.textMuted, marginBottom: 14, lineHeight: 1.5 }}>
@@ -2216,7 +2225,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
           <NavButtons
             onPrev={goPrev}
             onNext={goNext}
-            nextDisabled={!state.photoType}
+            nextDisabled={(state.photoType || []).length === 0}
             prevDisabled={stepIndex === 0}
           />
           <ShootInfoCard step="photoType" />
@@ -3353,7 +3362,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
 
   3.  Change founder WhatsApp number:
       - Find FOUNDER_WHATSAPP at the top of this file.
-      - Replace '916304000624' with your number (country code + number, no spaces).
+      - Replace '917730861421' with your number (country code + number, no spaces).
 
   4.  Edit pricing:
       - Find the PRICING object near the top.

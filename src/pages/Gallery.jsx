@@ -8,7 +8,7 @@ import { RiCloseLine, RiArrowLeftLine, RiArrowRightLine } from 'react-icons/ri';
  * styled identically to the "Captured Forever" section on the home page.
  * Cinematic dark hover overlays, CSS column layout, 3px gaps.
  */
-const FILTERS = ['All', 'Wedding', 'Child', 'Event'];
+const FILTERS = ['All', 'Wedding', 'Pre Wedding', 'Child', 'Event'];
 
 export default function Gallery() {
   const sectionRef = useRef(null);
@@ -43,7 +43,7 @@ export default function Gallery() {
     activeFilter === 'All'
       ? galleryImages
       : galleryImages.filter(
-          img => img.category.toLowerCase() === activeFilter.toLowerCase()
+          img => img.category.toLowerCase() === activeFilter.toLowerCase().replace(' ', '-')
         );
 
   const openLightbox  = (img) => setLightbox(img);
