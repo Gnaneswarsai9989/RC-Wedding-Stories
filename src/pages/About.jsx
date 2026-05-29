@@ -301,7 +301,7 @@ export default function About() {
               transition={{ duration: 1, delay: 0.5 }}
             >
               <p>
-                With over <strong className="text-white/80 font-normal">8 years of dedicated experience</strong> behind the lens, Chotu has pioneered a distinctive style of candid wedding storytelling. A native of Nellore who refined his craft in the vibrant, high-stakes wedding landscapes of Chennai, Chotu blends absolute technical precision with intuitive emotional sensitivity.
+                With over <strong className="text-white/80 font-normal">8 years of dedicated experience</strong> behind the lens, Chotu has pioneered a distinctive style of candid wedding storytelling. A native of Nellore, Chotu blends absolute technical precision with intuitive emotional sensitivity to craft timeless visual art.
               </p>
               <p>
                 For Chotu, wedding photography isn't merely about capturing structured rituals; it's about freezing a feeling in its purest, most authentic state. His commitment to cinematic perfection ensures that each frame resonates with the same heartbeat felt on your wedding day.
@@ -314,18 +314,18 @@ export default function About() {
                   RC Wedding Stories Details
                 </h4>
                 <p className="text-xs leading-6">
-                  Founded in <strong className="text-white/80 font-normal">2025</strong> in Chennai, RC Wedding Stories was born out of a desire to move beyond stiff, traditional poses and center the visual narrative around raw, unscripted human emotions.
+                  Founded in <strong className="text-white/80 font-normal">2025</strong> in Nellore, RC Wedding Stories was born out of a desire to move beyond stiff, traditional poses and center the visual narrative around raw, unscripted human emotions.
                 </p>
                 <p className="text-xs leading-6">
-                  Now operating out of both <strong className="text-white/80 font-normal">Nellore, Andhra Pradesh</strong> and <strong className="text-white/80 font-normal">Chennai, Tamil Nadu</strong>, our team of passionate visual artists travels across all of South India. Over <strong className="text-white/80 font-normal">500+ couples</strong> have trusted us to document their sacred milestones, knowing we treat every event not as a routine project, but as an eternal piece of art.
+                  Operating out of <strong className="text-white/80 font-normal">Nellore, Andhra Pradesh</strong>, our team of passionate visual artists travels across all of South India. Over <strong className="text-white/80 font-normal">500+ couples</strong> have trusted us to document their sacred milestones, knowing we treat every event not as a routine project, but as an eternal piece of art.
                 </p>
               </div>
 
               {/* Dynamic Metadata Specs Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-white/5">
                 {[
-                  { label: 'Established', value: '2025 · Chennai' },
-                  { label: 'Bases', value: 'Nellore & Chennai' },
+                  { label: 'Established', value: '2025 · Nellore' },
+                  { label: 'Base', value: 'Nellore, AP' },
                   { label: 'Coverage', value: 'South India & Beyond' },
                 ].map(({ label, value }) => (
                   <div key={label}>
@@ -383,7 +383,7 @@ export default function About() {
             >
               <p className="text-white/50 text-sm leading-8" style={{ fontFamily: 'Inter', fontWeight: 300 }}>
                 RC Wedding Stories was born from a single obsession — the fleeting,
-                unrepeatable magic of human connection. Founded in Chennai with a
+                unrepeatable magic of human connection. Founded in Nellore with a
                 camera and a dream, we have spent nearly a decade transforming wedding
                 days into cinematic masterpieces.
               </p>
@@ -477,7 +477,7 @@ export default function About() {
             >
               <p className="text-white/30 text-xs tracking-widest uppercase mb-1" style={{ fontFamily: 'Inter' }}>Est.</p>
               <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 40, fontWeight: 300, color: 'white', lineHeight: 1 }}>2025</p>
-              <p className="text-white/40 text-xs mt-1" style={{ fontFamily: 'Inter', fontWeight: 300 }}>Chennai, India</p>
+              <p className="text-white/40 text-xs mt-1" style={{ fontFamily: 'Inter', fontWeight: 300 }}>Nellore, India</p>
             </motion.div>
           </div>
         </div>
