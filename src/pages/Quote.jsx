@@ -881,10 +881,10 @@ function YesNoChoice({ value, onChange, question }) {
                   fontFamily: 'Inter, sans-serif',
                   fontSize: 14,
                   fontWeight: 800,
-                  color: sel ? C.red : C.navy,
+                  color: sel ? C.green : C.navy,
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
-                  borderBottom: sel ? `2px solid ${C.red}` : '2px solid transparent',
+                  borderBottom: sel ? `2px solid ${C.green}` : '2px solid transparent',
                   paddingBottom: 4,
                   transition: 'all 0.3s ease',
                 }}
@@ -1163,6 +1163,16 @@ function InvoiceDisplay({ state, total, invoiceRef }) {
   const rows = [];
 
   // Photography type is style only — not priced separately
+  if (state.photoType && state.photoType.length > 0) {
+    state.photoType.forEach(t => {
+      const labelMap = {
+        candid: 'Candid Photography',
+        traditional: 'Traditional Photography',
+        drone: 'Drone Photography'
+      };
+      rows.push({ cat: 'Photography Style', label: labelMap[t] || t, amount: 0 });
+    });
+  }
 
   for (const ev of EVENT_PAGES) {
     const svcMap = state.events[ev.id] || {};
@@ -2408,21 +2418,21 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     width: 'clamp(200px, 36vw, 260px)',
                     padding: '24px 20px',
                     borderRadius: 22,
-                    border: sel ? `2px solid ${C.red}` : `2px solid ${C.glassBorder}`,
-                    background: sel ? `linear-gradient(135deg, rgba(10,10,10,0.07), rgba(10,10,10,0.02))` : C.glass,
+                    border: sel ? `2px solid ${C.green}` : `2px solid ${C.glassBorder}`,
+                    background: sel ? `linear-gradient(135deg, rgba(16,185,129,0.07), rgba(16,185,129,0.02))` : C.glass,
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
                     cursor: 'pointer',
                     textAlign: 'center',
                     position: 'relative',
-                    boxShadow: sel ? `0 0 40px rgba(10,10,10,0.18), ${C.shadow}` : C.shadow,
+                    boxShadow: sel ? `0 0 40px rgba(16,185,129,0.18), ${C.shadow}` : C.shadow,
                     transition: 'all 0.3s ease',
                   }}
                 >
                   <AnimatePresence>
                     {sel && (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                        style={{ position: 'absolute', top: 14, right: 14, width: 26, height: 26, borderRadius: '50%', background: C.red, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                        style={{ position: 'absolute', top: 14, right: 14, width: 26, height: 26, borderRadius: '50%', background: C.green, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
                         <FiCheck size={13} color="#fff" strokeWidth={3} />
                       </motion.div>
                     )}
@@ -2430,7 +2440,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                   <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
                     <img src={alb.img} alt={alb.label} style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: 10 }} />
                   </div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 700, color: sel ? C.red : C.navy, marginBottom: 8 }}>{alb.label}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 700, color: sel ? C.green : C.navy, marginBottom: 8 }}>{alb.label}</div>
                   <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, color: C.textMuted, lineHeight: 1.5, marginBottom: 14 }}>{alb.desc}</div>
                   
                   {sel ? (
@@ -2507,21 +2517,21 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     width: 'clamp(200px, 36vw, 260px)',
                     padding: '24px 20px',
                     borderRadius: 22,
-                    border: sel ? `2px solid ${C.red}` : `2px solid ${C.glassBorder}`,
-                    background: sel ? `linear-gradient(135deg, rgba(10,10,10,0.07), rgba(10,10,10,0.02))` : C.glass,
+                    border: sel ? `2px solid ${C.green}` : `2px solid ${C.glassBorder}`,
+                    background: sel ? `linear-gradient(135deg, rgba(16,185,129,0.07), rgba(16,185,129,0.02))` : C.glass,
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
                     cursor: 'pointer',
                     textAlign: 'center',
                     position: 'relative',
-                    boxShadow: sel ? `0 0 40px rgba(10,10,10,0.18), ${C.shadow}` : C.shadow,
+                    boxShadow: sel ? `0 0 40px rgba(16,185,129,0.18), ${C.shadow}` : C.shadow,
                     transition: 'all 0.3s ease',
                   }}
                 >
                   <AnimatePresence>
                     {sel && (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                        style={{ position: 'absolute', top: 14, right: 14, width: 26, height: 26, borderRadius: '50%', background: C.red, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                        style={{ position: 'absolute', top: 14, right: 14, width: 26, height: 26, borderRadius: '50%', background: C.green, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
                         <FiCheck size={13} color="#fff" strokeWidth={3} />
                       </motion.div>
                     )}
@@ -2529,7 +2539,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                   <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
                     <img src={alb.img} alt={alb.label} style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: 10 }} />
                   </div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 700, color: sel ? C.red : C.navy, marginBottom: 8 }}>{alb.label}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 700, color: sel ? C.green : C.navy, marginBottom: 8 }}>{alb.label}</div>
                   <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, color: C.textMuted, lineHeight: 1.5, marginBottom: 14 }}>{alb.desc}</div>
                   
                   {sel ? (
@@ -2606,21 +2616,21 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     width: 'clamp(160px, 26vw, 220px)',
                     padding: '28px 20px',
                     borderRadius: 20,
-                    border: sel ? `2px solid ${C.red}` : `2px solid ${C.glassBorder}`,
-                    background: sel ? `linear-gradient(135deg, rgba(10,10,10,0.07), rgba(10,10,10,0.02))` : C.glass,
+                    border: sel ? `2px solid ${C.green}` : `2px solid ${C.glassBorder}`,
+                    background: sel ? `linear-gradient(135deg, rgba(16,185,129,0.07), rgba(16,185,129,0.02))` : C.glass,
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
                     cursor: 'pointer',
                     textAlign: 'center',
                     position: 'relative',
-                    boxShadow: sel ? `0 0 32px rgba(10,10,10,0.18), ${C.shadow}` : C.shadow,
+                    boxShadow: sel ? `0 0 32px rgba(16,185,129,0.18), ${C.shadow}` : C.shadow,
                     transition: 'all 0.3s ease',
                   }}
                 >
                   <AnimatePresence>
                     {sel && (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                        style={{ position: 'absolute', top: 12, right: 12, width: 24, height: 24, borderRadius: '50%', background: C.red, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        style={{ position: 'absolute', top: 12, right: 12, width: 24, height: 24, borderRadius: '50%', background: C.green, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <FiCheck size={12} color="#fff" strokeWidth={3} />
                       </motion.div>
                     )}
@@ -2647,7 +2657,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                       letterSpacing: '-0.02em',
                     }}>{opt.num}</span>
                   </div>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: sel ? C.red : C.navy, marginBottom: 6 }}>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: sel ? C.green : C.navy, marginBottom: 6 }}>
                     <span style={{ fontFamily: 'Inter, sans-serif' }}>{opt.num}</span>
                     <span style={{ fontFamily: 'Cormorant Garamond, serif' }}>{opt.id === '1month' ? ' Month' : ' Months'}</span>
                   </div>
@@ -2740,7 +2750,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     width: 220,
                     padding: '24px',
                     borderRadius: 22,
-                    border: sel ? `2px solid ${C.red}` : `2px solid transparent`,
+                    border: sel ? `2px solid ${C.green}` : `2px solid transparent`,
                     background: 'transparent',
                     cursor: 'pointer',
                     textAlign: 'center',
@@ -2756,7 +2766,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     fontFamily: 'Cormorant Garamond, serif',
                     fontSize: 18,
                     fontWeight: 700,
-                    color: sel ? C.red : C.navy,
+                    color: sel ? C.green : C.navy,
                     letterSpacing: '0.02em',
                     transition: 'color 0.3s',
                     marginBottom: 14,
@@ -2818,21 +2828,21 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     width: 'clamp(150px, 22vw, 200px)',
                     padding: '26px 18px',
                     borderRadius: 20,
-                    border: sel ? `2px solid ${C.red}` : `2px solid ${C.glassBorder}`,
-                    background: sel ? `linear-gradient(135deg, rgba(10,10,10,0.08), rgba(10,10,10,0.02))` : C.glass,
+                    border: sel ? `2px solid ${C.green}` : `2px solid ${C.glassBorder}`,
+                    background: sel ? `linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02))` : C.glass,
                     backdropFilter: 'blur(20px)',
                     WebkitBackdropFilter: 'blur(20px)',
                     cursor: 'pointer',
                     textAlign: 'center',
                     position: 'relative',
-                    boxShadow: sel ? `0 0 28px rgba(10,10,10,0.18), ${C.shadow}` : C.shadow,
+                    boxShadow: sel ? `0 0 28px rgba(16,185,129,0.18), ${C.shadow}` : C.shadow,
                     transition: 'all 0.3s ease',
                   }}
                 >
                   <AnimatePresence>
                     {sel && (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                        style={{ position: 'absolute', top: 10, right: 10, width: 22, height: 22, borderRadius: '50%', background: C.red, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        style={{ position: 'absolute', top: 10, right: 10, width: 22, height: 22, borderRadius: '50%', background: C.green, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <FiCheck size={11} color="#fff" strokeWidth={3} />
                       </motion.div>
                     )}
@@ -2854,7 +2864,7 @@ var iv=setInterval(function(){t--;num.textContent=t;sec.textContent=t;arc.style.
                     {opt.icon}
                   </div>
 
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 16, fontWeight: 700, color: sel ? C.red : C.navy, marginBottom: 6 }}>{opt.id}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 16, fontWeight: 700, color: sel ? C.green : C.navy, marginBottom: 6 }}>{opt.id}</div>
                   <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, color: C.textMuted, lineHeight: 1.45 }}>{opt.desc}</div>
                 </motion.div>
               );
